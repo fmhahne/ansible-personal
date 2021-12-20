@@ -66,3 +66,8 @@
       community.general.flatpak:
         name: org.gnome.gedit
         state: absent
+
+    - name: Pull texlive/texlive image
+      containers.podman.podman_image:
+        name: "docker.io/texlive/texlive:latest"
+        state: present
