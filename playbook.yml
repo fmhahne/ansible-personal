@@ -88,4 +88,5 @@
           - seaborn
           - tvnamer
           - typer
+        state: latest
         extra_args: --user
