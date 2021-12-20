@@ -71,3 +71,21 @@
       containers.podman.podman_image:
         name: "docker.io/texlive/texlive:latest"
         state: present
+
+    - name: Install PyPI packages
+      ansible.builtin.pip:
+        name:
+          - black
+          - matplotlib
+          - mypy
+          - numpy
+          - pandas
+          - pylint
+          - pytest
+          - pytest-cov
+          - rich
+          - scipy
+          - seaborn
+          - tvnamer
+          - typer
+        extra_args: --user
