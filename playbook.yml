@@ -1,0 +1,68 @@
+- hosts: localhost
+  tasks:
+
+    - name: Add Visual Studio Code repo
+      ansible.builtin.copy:
+        content: "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc\n"
+        dest: /etc/yum.repos.d/vscode.repo
+
+    - name: Add Dropbox repo
+      ansible.builtin.copy:
+        content: "[Dropbox]\nname=Dropbox Repository\nbaseurl=http://linux.dropbox.com/fedora/$releasever/\ngpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc\n"
+        dest: /etc/yum.repos.d/dropbox.repo
+
+    - name: Overlay packages
+      community.general.rpm_ostree_pkg:
+        name:
+          - fira-code-fonts
+          - fish
+          - mkvtoolnix
+          - nautilus-dropbox
+          - podman-docker
+          - python3-pip
+          - rclone
+          - restic
+        state: present
+
+    - name: Remove RPM Firefox
+      community.general.rpm_ostree_pkg:
+        name: firefox
+        state: absent
+
+    - name: Add Flathub repo
+      community.general.flatpak_remote:
+        name: flathub-beta
+        state: present
+        flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
+
+    - name: Add Flathub beta repo
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    - name: Install flatpaks
+      community.general.flatpak:
+        name:
+          - com.github.johnfactotum.Foliate
+          - com.github.tchx84.Flatseal
+          - com.spotify.Client
+          - com.transmissionbt.Transmission
+          - com.valvesoftware.Steam
+          - org.gnome.TextEditor
+          - org.mozilla.firefox
+          - org.videolan.VLC
+          - org.zotero.Zotero
+        state: present
+        remote: flathub
+
+    - name: Install Google Chrome
+      community.general.flatpak:
+        name: com.google.Chrome
+        state: present
+        remote: flathub-beta
+
+    - name: Remove gedit
+      community.general.flatpak:
+        name: org.gnome.gedit
+        state: absent
