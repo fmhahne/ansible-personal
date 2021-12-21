@@ -14,6 +14,7 @@
     - name: Overlay packages
       community.general.rpm_ostree_pkg:
         name:
+          - code
           - fira-code-fonts
           - fish
           - mkvtoolnix
