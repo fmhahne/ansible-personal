@@ -50,6 +50,7 @@
           - com.transmissionbt.Transmission
           - com.valvesoftware.Steam
           - org.gnome.TextEditor
+          - org.libreoffice.LibreOffice
           - org.mozilla.firefox
           - org.videolan.VLC
           - org.zotero.Zotero
