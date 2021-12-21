@@ -31,15 +31,15 @@
 
     - name: Add Flathub repo
       community.general.flatpak_remote:
-        name: flathub-beta
-        state: present
-        flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-
-    - name: Add Flathub beta repo
-      community.general.flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+    - name: Add Flathub beta repo
+      community.general.flatpak_remote:
+        name: flathub-beta
+        state: present
+        flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
 
     - name: Install flatpaks
       community.general.flatpak:
