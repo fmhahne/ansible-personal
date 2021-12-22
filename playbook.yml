@@ -20,7 +20,6 @@
           - mkvtoolnix
           - nautilus-dropbox
           - podman-docker
-          - python3-pip
           - rclone
           - restic
         state: present
@@ -83,6 +82,7 @@
           - mypy
           - numpy
           - pandas
+          - pip
           - pylint
           - pytest
           - pytest-cov
