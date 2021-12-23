@@ -17,7 +17,6 @@
           - code
           - fira-code-fonts
           - fish
-          - mkvtoolnix
           - nautilus-dropbox
           - podman-docker
           - rclone
@@ -49,6 +48,7 @@
           - com.spotify.Client
           - com.transmissionbt.Transmission
           - com.valvesoftware.Steam
+          - org.bunkus.mkvtoolnix-gui
           - org.freedesktop.Platform.ffmpeg-full/x86_64/21.08
           - org.gnome.TextEditor
           - org.libreoffice.LibreOffice
