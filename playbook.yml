@@ -64,9 +64,11 @@
         state: present
         remote: flathub-beta
 
-    - name: Remove gedit
+    - name: Remove gedit & File Roller
       community.general.flatpak:
-        name: org.gnome.gedit
+        name:
+          - org.gnome.gedit
+          - org.gnome.FileRoller
         state: absent
 
     - name: Pull texlive/texlive image
