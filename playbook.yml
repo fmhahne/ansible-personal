@@ -43,6 +43,7 @@
     - name: Install flatpaks
       community.general.flatpak:
         name:
+          - com.calibre_ebook.calibre
           - com.github.johnfactotum.Foliate
           - com.github.tchx84.Flatseal
           - com.spotify.Client
