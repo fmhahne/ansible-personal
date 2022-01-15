@@ -2,11 +2,13 @@
   tasks:
 
     - name: Add Visual Studio Code repo
+      become: yes
       ansible.builtin.copy:
         content: "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc\n"
         dest: /etc/yum.repos.d/vscode.repo
 
     - name: Add Dropbox repo
+      become: yes
       ansible.builtin.copy:
         content: "[Dropbox]\nname=Dropbox Repository\nbaseurl=http://linux.dropbox.com/fedora/$releasever/\ngpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc\n"
         dest: /etc/yum.repos.d/dropbox.repo
@@ -50,12 +52,18 @@
           - com.transmissionbt.Transmission
           - com.valvesoftware.Steam
           - org.bunkus.mkvtoolnix-gui
-          - org.freedesktop.Platform.ffmpeg-full/x86_64/21.08
           - org.gnome.TextEditor
           - org.libreoffice.LibreOffice
           - org.mozilla.firefox
           - org.videolan.VLC
           - org.zotero.Zotero
+        state: present
+        remote: flathub
+
+    - name: Install ffmpeg
+      become: yes
+      community.general.flatpak:
+        name: org.freedesktop.Platform.ffmpeg-full/x86_64/21.08
         state: present
         remote: flathub
 
