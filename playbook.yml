@@ -34,7 +34,6 @@
       community.general.rpm_ostree_pkg:
         name:
           - code
-          - fira-code-fonts
           - fish
           - nautilus-dropbox
           - podman-docker
@@ -55,17 +54,21 @@
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
 
-    - name: Add Flathub beta repo
-      community.general.flatpak_remote:
-        name: flathub-beta
-        state: present
-        flatpakrepo_url: https://flathub.org/beta-repo/flathub-beta.flatpakrepo
-
     - name: Install flatpaks
       community.general.flatpak:
         name:
           - com.spotify.Client
+          - org.gnome.baobab
+          - org.gnome.Calculator
+          - org.gnome.Calendar
+          - org.gnome.Characters
+          - org.gnome.clocks
+          - org.gnome.eog
+          - org.gnome.Evince
+          - org.gnome.font-viewer
+          - org.gnome.Logs
           - org.gnome.TextEditor
+          - org.gnucash.GnuCash
           - org.libreoffice.LibreOffice
           - org.mozilla.firefox
           - org.videolan.VLC
@@ -79,19 +82,6 @@
         name: org.freedesktop.Platform.ffmpeg-full/x86_64/21.08
         state: present
         remote: flathub
-
-    - name: Install Google Chrome
-      community.general.flatpak:
-        name: com.google.Chrome
-        state: present
-        remote: flathub-beta
-
-    - name: Remove gedit & File Roller
-      community.general.flatpak:
-        name:
-          - org.gnome.gedit
-          - org.gnome.FileRoller
-        state: absent
 
     - name: Pull texlive/texlive image
       containers.podman.podman_image:
