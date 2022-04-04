@@ -1,17 +1,28 @@
 - hosts: localhost
   tasks:
-
     - name: Add Visual Studio Code repo
-      become: yes
+      become: true
       ansible.builtin.copy:
-        content: "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc\n"
+        content: |
+          [code]
+          name=Visual Studio Code
+          baseurl=https://packages.microsoft.com/yumrepos/vscode
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://packages.microsoft.com/keys/microsoft.asc
         dest: /etc/yum.repos.d/vscode.repo
+        mode: u=rw,g=r,o=r
 
     - name: Add Dropbox repo
-      become: yes
+      become: true
       ansible.builtin.copy:
-        content: "[Dropbox]\nname=Dropbox Repository\nbaseurl=http://linux.dropbox.com/fedora/$releasever/\ngpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc\n"
+        content: |
+          [Dropbox]
+          name=Dropbox Repository
+          baseurl=http://linux.dropbox.com/fedora/35/
+          gpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc
         dest: /etc/yum.repos.d/dropbox.repo
+        mode: u=rw,g=r,o=r
 
     - name: Overlay packages
       community.general.rpm_ostree_pkg:
@@ -29,9 +40,10 @@
       ansible.builtin.command: rpm-ostree override remove firefox
       register: result
       changed_when: result.rc == 0
-      failed_when: False
+      failed_when: false
 
     - name: Add Flathub repo
+      become: true
       community.general.flatpak_remote:
         name: flathub
         state: present
@@ -62,7 +74,7 @@
         remote: flathub
 
     - name: Install ffmpeg
-      become: yes
+      become: true
       community.general.flatpak:
         name: org.freedesktop.Platform.ffmpeg-full/x86_64/21.08
         state: present
