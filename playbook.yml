@@ -1,4 +1,8 @@
-- hosts: localhost
+---
+- hosts:
+    - wall-e
+    - oscillon
+  connection: local
   tasks:
     - name: Add Visual Studio Code repo
       become: true
@@ -58,13 +62,7 @@
     - name: Install flatpaks
       community.general.flatpak:
         name:
-          - com.calibre_ebook.calibre
-          - com.github.johnfactotum.Foliate
-          - com.github.tchx84.Flatseal
           - com.spotify.Client
-          - com.transmissionbt.Transmission
-          - com.valvesoftware.Steam
-          - org.bunkus.mkvtoolnix-gui
           - org.gnome.TextEditor
           - org.libreoffice.LibreOffice
           - org.mozilla.firefox
@@ -102,6 +100,7 @@
       ansible.builtin.pip:
         name:
           - black
+          - isort
           - matplotlib
           - mypy
           - numpy
@@ -109,11 +108,24 @@
           - pip
           - pylint
           - pytest
-          - pytest-cov
-          - rich
           - scipy
-          - seaborn
-          - tvnamer
-          - typer
+        state: latest
+        extra_args: --user
+
+- hosts: wall-e
+  connection: local
+  tasks:
+    - name: Install Flatpaks
+      community.general.flatpak:
+        name:
+          - com.calibre_ebook.calibre
+          - com.transmissionbt.Transmission
+          - org.bunkus.mkvtoolnix-gui
+        state: present
+        remote: flathub
+
+    - name: Install PyPI packages
+      ansible.builtin.pip:
+        name: tvnamer
         state: latest
         extra_args: --user
