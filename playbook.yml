@@ -62,13 +62,11 @@
           - org.gnome.Calculator
           - org.gnome.Calendar
           - org.gnome.Characters
-          - org.gnome.clocks
           - org.gnome.eog
           - org.gnome.Evince
           - org.gnome.font-viewer
           - org.gnome.Logs
           - org.gnome.TextEditor
-          - org.gnucash.GnuCash
           - org.libreoffice.LibreOffice
           - org.mozilla.firefox
           - org.videolan.VLC
@@ -113,6 +111,8 @@
           - com.calibre_ebook.calibre
           - com.transmissionbt.Transmission
           - org.bunkus.mkvtoolnix-gui
+          - org.gnome.clocks
+          - org.gnucash.GnuCash
         state: present
         remote: flathub
 
