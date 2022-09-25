@@ -111,8 +111,6 @@
           - com.calibre_ebook.calibre
           - com.transmissionbt.Transmission
           - org.bunkus.mkvtoolnix-gui
-          - org.gnome.clocks
-          - org.gnucash.GnuCash
         state: present
         remote: flathub
 
