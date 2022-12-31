@@ -25,7 +25,7 @@
         content: |
           [Dropbox]
           name=Dropbox Repository
-          baseurl=http://linux.dropbox.com/fedora/35/
+          baseurl=http://linux.dropbox.com/fedora/37/
           gpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc
         dest: /etc/yum.repos.d/dropbox.repo
         mode: u=rw,g=r,o=r
