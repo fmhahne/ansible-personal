@@ -19,23 +19,11 @@
         dest: /etc/yum.repos.d/vscode.repo
         mode: u=rw,g=r,o=r
 
-    - name: Add Dropbox repo
-      become: true
-      ansible.builtin.copy:
-        content: |
-          [Dropbox]
-          name=Dropbox Repository
-          baseurl=http://linux.dropbox.com/fedora/37/
-          gpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc
-        dest: /etc/yum.repos.d/dropbox.repo
-        mode: u=rw,g=r,o=r
-
     - name: Overlay packages
       community.general.rpm_ostree_pkg:
         name:
           - code
           - fish
-          - nautilus-dropbox
           - podman-docker
           - rclone
           - restic
@@ -57,6 +45,7 @@
     - name: Install flatpaks
       community.general.flatpak:
         name:
+          - com.dropbox.Client
           - com.spotify.Client
           - org.gnome.baobab
           - org.gnome.Calculator
