@@ -61,7 +61,7 @@
     - name: Install ffmpeg
       become: true
       community.general.flatpak:
-        name: org.freedesktop.Platform.ffmpeg-full/x86_64/21.08
+        name: org.freedesktop.Platform.ffmpeg-full/x86_64/22.08
         state: present
         remote: flathub
 
