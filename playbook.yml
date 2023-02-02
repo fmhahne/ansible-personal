@@ -29,12 +29,6 @@
           - restic
         state: present
 
-    - name: Remove RPM Firefox
-      ansible.builtin.command: rpm-ostree override remove firefox firefox-langpacks
-      register: result
-      changed_when: result.rc == 0
-      failed_when: false
-
     - name: Add Flathub repo
       become: true
       community.general.flatpak_remote:
