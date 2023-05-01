@@ -1,6 +1,6 @@
 # Personal ansible
 
-A simple Ansible playbook to setup my personal Fedora Silverblue workstation.
+A simple Ansible playbook to set up my personal Fedora Silverblue workstation.
 
 To install Ansible and the necessary collections:
 
@@ -20,5 +20,4 @@ If you want to make sure only the specified flatpak are installed, then run befo
 
 ```sh
 flatpak uninstall --all
-flatpak remote-modify --disable fedora
 ```

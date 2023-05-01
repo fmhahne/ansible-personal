@@ -1,7 +1,5 @@
 ---
-- hosts:
-    - wall-e
-    - oscillon
+- hosts: all
   connection: local
   roles:
     - rpm-ostree-upgrades
@@ -19,15 +17,49 @@
         dest: /etc/yum.repos.d/vscode.repo
         mode: u=rw,g=r,o=r
 
+    - name: Add Dropbox repo
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [Dropbox]
+          name=Dropbox Repository
+          baseurl=http://linux.dropbox.com/fedora/$releasever/
+          gpgkey=https://linux.dropbox.com/fedora/rpm-public-key.asc
+        dest: /etc/yum.repos.d/dropbox.repo
+        mode: u=rw,g=r,o=r
+
+    - name: Add Google Chrome repo
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [google-chrome]
+          name=google-chrome
+          baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
+          skip_if_unavailable=True
+          gpgcheck=1
+          gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+          enabled=1
+        dest: /etc/yum.repos.d/google-chrome.repo
+        mode: u=rw,g=r,o=r
+
     - name: Overlay packages
       community.general.rpm_ostree_pkg:
         name:
           - code
           - fish
+          - google-chrome-stable
+          - nautilus-dropbox
           - podman-docker
           - rclone
           - restic
+          - syncthing
         state: present
+
+    - name: Change shell to fish
+      become: true
+      ansible.builtin.user:
+        name: fernando
+        shell: /usr/bin/fish
 
     - name: Add Flathub repo
       become: true
@@ -36,12 +68,28 @@
         state: present
         flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
 
+    - name: Disable Fedora flatpak repo
+      become: true
+      community.general.flatpak_remote:
+        name: fedora
+        state: present
+        enabled: false
+
     - name: Install flatpaks
       community.general.flatpak:
         name:
-          - com.dropbox.Client
+          - com.calibre_ebook.calibre
+          - com.github.jeromerobert.pdfarranger
+          - com.github.tchx84.Flatseal
+          - com.github.unrud.VideoDownloader
+          - com.makemkv.MakeMKV
           - com.spotify.Client
+          - com.transmissionbt.Transmission
+          - com.valvesoftware.Steam
+          - fr.handbrake.ghb
+          - org.bunkus.mkvtoolnix-gui
           - org.gnome.baobab
+          - org.gnome.Boxes
           - org.gnome.Calculator
           - org.gnome.Calendar
           - org.gnome.Characters
@@ -50,18 +98,13 @@
           - org.gnome.Evince
           - org.gnome.font-viewer
           - org.gnome.Logs
+          - org.gnome.NautilusPreviewer
           - org.gnome.TextEditor
+          - org.kde.kdenlive
           - org.libreoffice.LibreOffice
           - org.mozilla.firefox
           - org.videolan.VLC
           - org.zotero.Zotero
-        state: present
-        remote: flathub
-
-    - name: Install ffmpeg
-      become: true
-      community.general.flatpak:
-        name: org.freedesktop.Platform.ffmpeg-full/x86_64/22.08
         state: present
         remote: flathub
 
@@ -73,33 +116,8 @@
     - name: Install PyPI packages
       ansible.builtin.pip:
         name:
-          - black
-          - isort
-          - matplotlib
-          - mypy
-          - numpy
-          - pandas
+          - ansible
           - pip
-          - pylint
-          - pytest
-          - scipy
-        state: latest
-        extra_args: --user
-
-- hosts: wall-e
-  connection: local
-  tasks:
-    - name: Install Flatpaks
-      community.general.flatpak:
-        name:
-          - com.calibre_ebook.calibre
-          - com.transmissionbt.Transmission
-          - org.bunkus.mkvtoolnix-gui
-        state: present
-        remote: flathub
-
-    - name: Install PyPI packages
-      ansible.builtin.pip:
-        name: tvnamer
+          - tvnamer
         state: latest
         extra_args: --user
