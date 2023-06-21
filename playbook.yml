@@ -1,5 +1,7 @@
 ---
-- hosts: all
+- hosts:
+    - wall-e
+    - oscillon
   connection: local
   roles:
     - rpm-ostree-upgrades
@@ -94,18 +96,10 @@
     - name: Install flatpaks
       community.general.flatpak:
         name:
-          - com.calibre_ebook.calibre
           - com.github.jeromerobert.pdfarranger
           - com.github.tchx84.Flatseal
-          - com.github.unrud.VideoDownloader
-          - com.makemkv.MakeMKV
           - com.spotify.Client
-          - com.transmissionbt.Transmission
-          - com.valvesoftware.Steam
-          - fr.handbrake.ghb
-          - org.bunkus.mkvtoolnix-gui
           - org.gnome.baobab
-          - org.gnome.Boxes
           - org.gnome.Calculator
           - org.gnome.Calendar
           - org.gnome.Characters
@@ -116,9 +110,7 @@
           - org.gnome.Logs
           - org.gnome.NautilusPreviewer
           - org.gnome.TextEditor
-          - org.kde.kdenlive
           - org.libreoffice.LibreOffice
-          - org.mozilla.firefox
           - org.videolan.VLC
           - org.zotero.Zotero
         state: present
@@ -137,3 +129,21 @@
           - tvnamer
         state: latest
         extra_args: --user
+
+- hosts:
+    - wall-e
+  connection: local
+  tasks:
+    - name: Install flatpaks
+      community.general.flatpak:
+        name:
+          - com.calibre_ebook.calibre
+          - com.github.unrud.VideoDownloader
+          - com.makemkv.MakeMKV
+          - com.transmissionbt.Transmission
+          - com.valvesoftware.Steam
+          - fr.handbrake.ghb
+          - org.bunkus.mkvtoolnix-gui
+          - org.mozilla.firefox
+        state: present
+        remote: flathub
