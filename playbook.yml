@@ -55,12 +55,6 @@
           - syncthing
         state: present
 
-    - name: Change shell to fish
-      become: true
-      ansible.builtin.user:
-        name: fernando
-        shell: /usr/bin/fish
-
     - name: Add Flathub repo
       become: true
       community.general.flatpak_remote:
