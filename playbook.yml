@@ -28,26 +28,11 @@
         dest: /etc/yum.repos.d/dropbox.repo
         mode: u=rw,g=r,o=r
 
-    - name: Add Google Chrome repo
-      become: true
-      ansible.builtin.copy:
-        content: |
-          [google-chrome]
-          name=google-chrome
-          baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
-          skip_if_unavailable=True
-          gpgcheck=1
-          gpgkey=https://dl.google.com/linux/linux_signing_key.pub
-          enabled=1
-        dest: /etc/yum.repos.d/google-chrome.repo
-        mode: u=rw,g=r,o=r
-
     - name: Overlay packages
       community.general.rpm_ostree_pkg:
         name:
           - code
           - fish
-          - google-chrome-stable
           - nautilus-dropbox
           - podman-docker
           - rclone
@@ -74,6 +59,7 @@
         name:
           - com.github.jeromerobert.pdfarranger
           - com.github.tchx84.Flatseal
+          - com.google.Chrome
           - com.spotify.Client
           - org.gnome.baobab
           - org.gnome.Calculator
