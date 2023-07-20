@@ -88,9 +88,16 @@
         name:
           - ansible
           - pip
-          - tvnamer
+          - pipx
         state: latest
         extra_args: --user
+
+    - name: Install pipx apps
+      community.general.pipx:
+        name:
+          - trash-cli
+          - tvnamer
+        state: present
 
 - hosts:
     - wall-e
