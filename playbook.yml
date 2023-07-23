@@ -1,5 +1,6 @@
 ---
-- hosts:
+- name: Setup work and home computers
+  hosts:
     - wall-e
     - oscillon
   connection: local
@@ -95,7 +96,7 @@
           - ansible
           - pip
           - pipx
-        state: latest
+        state: present
         extra_args: --user
 
     - name: Install pipx apps
@@ -105,7 +106,8 @@
           - tvnamer
         state: present
 
-- hosts:
+- name: Extra setup for home computer
+  hosts:
     - wall-e
   connection: local
   tasks:
