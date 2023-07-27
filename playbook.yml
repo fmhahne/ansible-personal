@@ -90,15 +90,6 @@
         name: "docker.io/texlive/texlive:latest"
         state: present
 
-    - name: Install PyPI packages
-      ansible.builtin.pip:
-        name:
-          - ansible
-          - pip
-          - pipx
-        state: present
-        extra_args: --user
-
     - name: Install pipx apps
       community.general.pipx:
         name:
