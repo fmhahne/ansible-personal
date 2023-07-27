@@ -2,11 +2,10 @@
 
 A simple Ansible playbook to set up my personal Fedora Silverblue workstation.
 
-To install Ansible and the necessary collections:
+To install Ansible (using pipx) and the necessary collections:
 
 ```sh
-python -m ensurepip
-python -m pip install ansible
+pipx install --include-deps ansible
 ansible-galaxy collection install community.general containers.podman
 ```
 
