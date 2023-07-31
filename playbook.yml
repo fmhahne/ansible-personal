@@ -90,6 +90,11 @@
         name: "docker.io/texlive/texlive:latest"
         state: present
 
+    - name: Pull my toolbox image
+      containers.podman.podman_image:
+        name: "ghcr.io/fmhahne/fedora-toolbox:main"
+        state: present
+
     - name: Install pipx apps
       community.general.pipx:
         name:
