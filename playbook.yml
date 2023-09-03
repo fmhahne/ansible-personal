@@ -73,10 +73,10 @@
           - org.gnome.Calendar
           - org.gnome.Characters
           - org.gnome.clocks
-          - org.gnome.eog
           - org.gnome.Evince
           - org.gnome.font-viewer
           - org.gnome.Logs
+          - org.gnome.Loupe
           - org.gnome.NautilusPreviewer
           - org.gnome.TextEditor
           - org.libreoffice.LibreOffice
