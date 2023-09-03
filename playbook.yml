@@ -97,10 +97,14 @@
 
     - name: Install pipx apps
       community.general.pipx:
-        name:
-          - trash-cli
-          - tvnamer
+        name: "{{ item }}"
         state: present
+      with_items:
+        - ansible-lint
+        - black
+        - poetry
+        - trash-cli
+        - tvnamer
 
 - name: Extra setup for home computer
   hosts:
