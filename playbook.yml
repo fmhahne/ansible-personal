@@ -35,7 +35,6 @@
           - code
           - fish
           - nautilus-dropbox
-          - podman-docker
           - rclone
           - restic
           - syncthing
@@ -89,6 +88,15 @@
       containers.podman.podman_image:
         name: "docker.io/texlive/texlive:latest"
         state: present
+
+    - name: Add wraper to run latexmk in container
+      become: true
+      ansible.builtin.copy:
+        content: |
+          #!/bin/sh
+          podman run -i --rm -w "$(pwd)" -v "$(pwd):$(pwd):Z" docker.io/texlive/texlive:latest latexmk "$@"
+        dest: /var/home/fernando/.local/bin/latexmk
+        mode: u=rwx,g=rx,o=x
 
     - name: Pull my toolbox image
       containers.podman.podman_image:
