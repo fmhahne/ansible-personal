@@ -36,8 +36,6 @@
           - fish
           - nautilus-dropbox
           - podman-docker
-          - rclone
-          - restic
           - syncthing
         state: present
 
