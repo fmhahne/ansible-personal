@@ -62,10 +62,14 @@
     - name: Install flatpaks
       community.general.flatpak:
         name:
+          - ca.desrt.dconf-editor
           - com.github.jeromerobert.pdfarranger
           - com.github.tchx84.Flatseal
           - com.google.Chrome
+          - com.mattjakeman.ExtensionManager
           - com.spotify.Client
+          - io.github.fsobolev.TimeSwitch
+          - org.gimp.GIMP
           - org.gnome.baobab
           - org.gnome.Calculator
           - org.gnome.Calendar
@@ -77,6 +81,7 @@
           - org.gnome.Loupe
           - org.gnome.NautilusPreviewer
           - org.gnome.TextEditor
+          - org.inkscape.Inkscape
           - org.libreoffice.LibreOffice
           - org.videolan.VLC
           - org.zotero.Zotero
@@ -119,6 +124,8 @@
           - com.valvesoftware.Steam
           - fr.handbrake.ghb
           - org.bunkus.mkvtoolnix-gui
+          - org.gnome.gitlab.YaLTeR.Identity
+          - org.jdownloader.JDownloader
           - org.mozilla.firefox
         state: present
         remote: flathub
