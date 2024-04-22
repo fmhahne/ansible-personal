@@ -1,8 +1,7 @@
 ---
-- name: Setup work and home computers
+- name: Setup workstation
   hosts:
     - wall-e
-    - oscillon
   connection: local
   tasks:
     - name: Add Visual Studio Code repo
@@ -36,7 +35,7 @@
           - fish
           - nautilus-dropbox
           - podman-docker
-          - syncthing
+          - restic
         state: present
 
     - name: Change shell to fish
@@ -63,12 +62,19 @@
       community.general.flatpak:
         name:
           - ca.desrt.dconf-editor
+          - com.calibre_ebook.calibre
           - com.github.jeromerobert.pdfarranger
           - com.github.tchx84.Flatseal
+          - com.github.unrud.VideoDownloader
           - com.google.Chrome
+          - com.makemkv.MakeMKV
           - com.mattjakeman.ExtensionManager
           - com.spotify.Client
+          - com.transmissionbt.Transmission
+          - com.valvesoftware.Steam
+          - fr.handbrake.ghb
           - io.github.fsobolev.TimeSwitch
+          - org.bunkus.mkvtoolnix-gui
           - org.gimp.GIMP
           - org.gnome.baobab
           - org.gnome.Calculator
@@ -77,12 +83,15 @@
           - org.gnome.clocks
           - org.gnome.Evince
           - org.gnome.font-viewer
+          - org.gnome.gitlab.YaLTeR.Identity
           - org.gnome.Logs
           - org.gnome.Loupe
           - org.gnome.NautilusPreviewer
           - org.gnome.TextEditor
           - org.inkscape.Inkscape
+          - org.jdownloader.JDownloader
           - org.libreoffice.LibreOffice
+          - org.mozilla.firefox
           - org.videolan.VLC
           - org.zotero.Zotero
         state: present
@@ -95,37 +104,5 @@
 
     - name: Pull my toolbox image
       containers.podman.podman_image:
-        name: "ghcr.io/fmhahne/fedora-toolbox:main"
+        name: "ghcr.io/fmhahne/fedora-toolbox:latest"
         state: present
-
-    - name: Install pipx apps
-      community.general.pipx:
-        name: "{{ item }}"
-        state: present
-      with_items:
-        - ansible-lint
-        - black
-        - poetry
-        - trash-cli
-        - tvnamer
-
-- name: Extra setup for home computer
-  hosts:
-    - wall-e
-  connection: local
-  tasks:
-    - name: Install flatpaks
-      community.general.flatpak:
-        name:
-          - com.calibre_ebook.calibre
-          - com.github.unrud.VideoDownloader
-          - com.makemkv.MakeMKV
-          - com.transmissionbt.Transmission
-          - com.valvesoftware.Steam
-          - fr.handbrake.ghb
-          - org.bunkus.mkvtoolnix-gui
-          - org.gnome.gitlab.YaLTeR.Identity
-          - org.jdownloader.JDownloader
-          - org.mozilla.firefox
-        state: present
-        remote: flathub
