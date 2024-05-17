@@ -28,6 +28,21 @@
         dest: /etc/yum.repos.d/dropbox.repo
         mode: u=rw,g=r,o=r
 
+    - name: Add Tailscale repo
+      become: true
+      ansible.builtin.copy:
+        content: |
+          [tailscale-stable]
+          name=Tailscale stable
+          baseurl=https://pkgs.tailscale.com/stable/fedora/$basearch
+          enabled=1
+          type=rpm
+          repo_gpgcheck=1
+          gpgcheck=0
+          gpgkey=https://pkgs.tailscale.com/stable/fedora/repo.gpg
+        dest: /etc/yum.repos.d/tailscale.repo
+        mode: u=rw,g=r,o=r
+
     - name: Overlay packages
       community.general.rpm_ostree_pkg:
         name:
@@ -36,6 +51,7 @@
           - nautilus-dropbox
           - podman-docker
           - restic
+          - tailscale
         state: present
 
     - name: Change shell to fish
