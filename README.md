@@ -18,5 +18,5 @@ flatpak uninstall --all
 To use the playbook:
 
 ```sh
-ansible-playbook -K playbook.yml -l $(hostname)
+ansible-playbook -K playbook.yml
 ```

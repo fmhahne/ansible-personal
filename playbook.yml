@@ -1,7 +1,6 @@
 ---
 - name: Setup workstation
-  hosts:
-    - wall-e
+  hosts: localhost
   connection: local
   tasks:
     - name: Add Visual Studio Code repo
