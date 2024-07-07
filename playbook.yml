@@ -2,6 +2,8 @@
 - name: Setup workstation
   hosts: localhost
   connection: local
+  roles:
+    - rpm-ostree-upgrades
   tasks:
     - name: Add Visual Studio Code repo
       become: true
