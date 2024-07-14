@@ -131,6 +131,7 @@
           - numpy
           - pip
           - pipx
+          - psutil
         state: latest
         extra_args: --user
 
@@ -145,3 +146,38 @@
         - ruff
         - trash-cli
         - tvnamer
+
+    - name: Set Julia Mono as default monospace font
+      community.general.dconf:
+        key: "/org/gnome/desktop/interface/monospace-font-name"
+        value: "'JuliaMono 10.5'"
+
+    - name: Use Super+Tab to switch applications
+      community.general.dconf:
+        key: "/org/gnome/desktop/wm/keybindings/switch-applications"
+        value: "['<Super>Tab']"
+
+    - name: Use Super+Shift+Tab to switch applications backward
+      community.general.dconf:
+        key: "/org/gnome/desktop/wm/keybindings/switch-applications-backward"
+        value: "['<Shift><Super>Tab']"
+
+    - name: Use Alt+Tab to switch windows
+      community.general.dconf:
+        key: "/org/gnome/desktop/wm/keybindings/switch-windows"
+        value: "['<Alt>Tab']"
+
+    - name: Use Alt+Shift+Tab to switch windows backward
+      community.general.dconf:
+        key: "/org/gnome/desktop/wm/keybindings/switch-windows-backward"
+        value: "['<Shift><Alt>Tab']"
+
+    - name: Auto remove old temp files
+      community.general.dconf:
+        key: "/org/gnome/desktop/privacy/remove-old-temp-files"
+        value: "true"
+
+    - name: Auto remove old trash files
+      community.general.dconf:
+        key: "/org/gnome/desktop/privacy/remove-old-trash-files"
+        value: "true"
