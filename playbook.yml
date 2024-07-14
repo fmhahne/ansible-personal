@@ -113,15 +113,13 @@
         state: present
         remote: flathub
 
-    - name: Pull texlive/texlive image
+    - name: Pull container images
       containers.podman.podman_image:
-        name: "docker.io/texlive/texlive:latest"
+        name: "{{ item }}"
         state: present
-
-    - name: Pull my toolbox image
-      containers.podman.podman_image:
-        name: "ghcr.io/fmhahne/fedora-toolbox:latest"
-        state: present
+      with_items:
+        - "docker.io/texlive/texlive"
+        - "ghcr.io/fmhahne/fedora-toolbox"
 
     - name: Install pip packages
       ansible.builtin.pip:
