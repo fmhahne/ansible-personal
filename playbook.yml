@@ -122,3 +122,26 @@
       containers.podman.podman_image:
         name: "ghcr.io/fmhahne/fedora-toolbox:latest"
         state: present
+
+    - name: Install pip packages
+      ansible.builtin.pip:
+        name:
+          - ansible
+          - matplotlib
+          - numpy
+          - pip
+          - pipx
+        state: latest
+        extra_args: --user
+
+    - name: Install pipx apps
+      community.general.pipx:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - ansible-lint
+        - hatch
+        - pre-commit
+        - ruff
+        - trash-cli
+        - tvnamer
