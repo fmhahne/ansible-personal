@@ -102,7 +102,6 @@
           - org.gnome.gitlab.YaLTeR.Identity
           - org.gnome.Logs
           - org.gnome.Loupe
-          - org.gnome.NautilusPreviewer
           - org.gnome.TextEditor
           - org.inkscape.Inkscape
           - org.jdownloader.JDownloader
