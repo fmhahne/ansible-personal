@@ -49,9 +49,9 @@
         name:
           - code
           - fish
+          - gcc
           - nautilus-dropbox
-          - podman-docker
-          - restic
+          - syncthing
           - tailscale
         state: present
 
