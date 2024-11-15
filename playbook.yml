@@ -51,6 +51,7 @@
           - fish
           - gcc
           - nautilus-dropbox
+          - restic
           - syncthing
           - tailscale
         state: present
